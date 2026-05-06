@@ -22,3 +22,5 @@ A personal sticky notes app with a cutesy pastel design. I built as a learning p
 4. Built REST API endpoints for notes (GET, POST, PUT, DELETE)
 5. Added user accounts and login/register system
 6. Filtered notes per user for privacy
+
+![App screenshot](login-screen.png) 
