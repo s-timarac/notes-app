@@ -1,0 +1,270 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+}
+
+/* notes app background */
+.bg {
+    position: fixed;
+    inset: 0;
+    background: #FEF6EC;
+    background-image: radial-gradient(circle at 10% 20%, #FFE4CC55 0%, transparent 40%), radial-gradient(circle at 90% 80%, #EDD9FF55 0%, transparent 40%), radial-gradient(circle at 50% 50%, #C8F5E033 0%, transparent 60%);
+    filter: blur(6px) brightness(0.92);
+    transform: scale(1.05);
+    z-index: 0;
+}
+
+/* sticky notes in background */
+.bg-note {
+    position: absolute;
+    border-radius: 4px;
+    padding: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(254, 246, 236, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Login card */
+.card {
+    background: rgba(255, 253, 248, 0.92);
+    border: 2.5px solid #F9E94E;
+    border-radius: 24px;
+    padding: 40px;
+    width: 400px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(249, 233, 78, 0.3), inset 0 1px 0 rgba(255,255,255,0.8);
+    position: relative;
+    animation: popIn 0.3s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 18px;
+    background: #F9E94E99;
+    border: 1px solid #F9E94E;
+    border-radius: 4px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    margin-top: 8px;
+}
+
+.logo-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #FFF9C4, #FFD6E0);
+    border: 2.5px solid #F9E94E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 2px 3px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 26px;
+    color: #4A3728;
+    line-height: 1;
+}
+
+.subtitle {
+    font-size: 11px;
+    color: #BBA090;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    margin-top: 4px;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    background: #FFF9C488;
+    padding: 4px;
+    border-radius: 99px;
+    border: 2px solid #F9E94E;
+}
+
+.tab {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 99px;
+    background: transparent;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: #BBA090;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab.active {
+    background: linear-gradient(135deg, #FFF9C4, #F9E94E);
+    color: #5A4800;
+    box-shadow: 2px 3px 0px #D4B800;
+}
+
+.field {
+    margin-bottom: 14px;
+}
+
+label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: #BBA090;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    padding: 10px 16px;
+    border: 2px solid #F9E94E;
+    border-radius: 99px;
+    background: #FFFDF5;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4A3728;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    input:focus {
+        border-color: #F0D800;
+        box-shadow: 0 0 0 3px rgba(240, 216, 0, 0.15);
+    }
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background: linear-gradient(135deg, #FFF9C4, #F9E94E);
+    border: 2.5px solid #F0D800;
+    border-radius: 99px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: #5A4800;
+    cursor: pointer;
+    box-shadow: 2px 3px 0px #D4B800;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+    .btn:active {
+        transform: translateY(2px);
+        box-shadow: 0px 1px 0px #D4B800;
+    }
+
+.error {
+    background: #FFE0E0;
+    border: 1.5px solid #FF8FAB;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #8B0033;
+    margin-top: 12px;
+    display: none;
+}
+
+.divider {
+    border: none;
+    border-top: 2px dashed #FFD6A0;
+    margin: 20px 0 16px;
+}
+
+.footer-text {
+    text-align: center;
+    font-size: 11px;
+    color: #BBA090;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: calc(100vw - 32px);
+        padding: 28px 22px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .subtitle {
+        margin-bottom: 18px;
+    }
+
+    input {
+        font-size: 16px;
+    }
+    /* prevents iOS zoom on focus */
+
+    .btn {
+        font-size: 14px;
+    }
+
+    /* hide some bg notes on mobile to reduce clutter */
+    .bg-note:nth-child(n+4) {
+        display: none;
+    }
+}
+
+
+
+

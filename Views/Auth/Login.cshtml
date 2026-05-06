@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>my notes — login</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/login.css" />
+   
+</head>
+<body>
+
+    <!-- bg with sticky notes -->
+    <div class="bg">
+        <div class="bg-note" style="top:10%;left:8%;background:#FFF9C4;border:2px solid #F9E94E;transform:rotate(-2deg);color:#7A6E00;">
+             header1<br><span style="font-weight:400;font-size:11px">sample note bruh idk</span>
+        </div>
+        <div class="bg-note" style="top:20%;left:30%;background:#FFD6E0;border:2px solid #FF8FAB;transform:rotate(1.5deg);color:#8B0033;">
+            header2<br><span style="font-weight:400;font-size:11px">sample note lorem ipsum dolor sit amet</span>
+        </div>
+        <div class="bg-note" style="top:55%;left:12%;background:#C8F5E0;border:2px solid #5DDBA4;transform:rotate(-1deg);color:#0E6644;">
+            header22<br><span style="font-weight:400;font-size:11px">sample note</span>
+        </div>
+        <div class="bg-note" style="top:15%;right:10%;background:#EDD9FF;border:2px solid #C084FC;transform:rotate(2deg);color:#4A1072;">
+            header23<br><span style="font-weight:400;font-size:11px">aaaaaaaaaaaaaaaaa</span>
+        </div>
+        <div class="bg-nheader" style="top:60%;right:8%;background:#C9EEFF;border:2px solid #5BC4F5;transform:rotate(-1.5deg);color:#0A4A6E;">
+            header33<br><span style="font-weight:400;font-size:11px">my shoulder hurts</span>
+        </div>
+        <div class="bg-note" style="top:70%;left:40%;background:#FFE4CC;border:2px solid #FFA05E;transform:rotate(1deg);color:#7A3200;">
+            header34<br><span style="font-weight:400;font-size:11px">sample noteeeeee</span>
+        </div>
+
+        <!-- fake header -->
+        <div style="padding:28px 32px;display:flex;align-items:center;gap:10px;border-bottom:2.5px dashed #FFD6A0;">
+            <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#FFF9C4,#FFD6E0);border:2.5px solid #F9E94E;display:flex;align-items:center;justify-content:center;font-size:22px;">📝</div>
+            <div style="font-family:'Pacifico',cursive;font-size:24px;color:#4A3728;">my notes</div>
+        </div>
+    </div>
+
+    <!-- frosted overlay and login card -->
+    <div class="overlay">
+        <div class="card">
+            <div class="tape"></div>
+
+            <div class="logo">
+                <div class="logo-icon">📝</div>
+                <div>
+                    <h1>my notes</h1>
+                    <div class="subtitle">log into your account or make one!</div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('login')">✏️ sign in</button>
+                <button class="tab" onclick="switchTab('register')">🌸 sign up</button>
+            </div>
+
+            <!-- login Form -->
+            <div id="loginForm">
+                <div class="field">
+                    <label>username</label>
+                    <input type="text" id="loginUsername" placeholder="your username" />
+                </div>
+                <div class="field">
+                    <label>password</label>
+                    <input type="password" id="loginPassword" placeholder="your password"
+                           onkeydown="if(event.key==='Enter') login()" />
+                </div>
+                <button class="btn" onclick="login()">✏️ sign in</button>
+                <div class="error" id="loginError"></div>
+            </div>
+
+            <!-- register Form -->
+            <div id="registerForm" style="display:none">
+                <div class="field">
+                    <label>display name</label>
+                    <input type="text" id="regDisplayName" placeholder="what should we call you?" />
+                </div>
+                <div class="field">
+                    <label>username</label>
+                    <input type="text" id="regUsername" placeholder="pick a username" />
+                </div>
+                <div class="field">
+                    <label>password</label>
+                    <input type="password" id="regPassword" placeholder="pick a password"
+                           onkeydown="if(event.key==='Enter') register()" />
+                </div>
+                <button class="btn" onclick="register()">🌸 create account</button>
+                <div class="error" id="registerError"></div>
+            </div>
+
+            <hr class="divider" />
+            <div class="footer-text">your notes are private & only visible to you 🔒</div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+            document.querySelectorAll('.tab').forEach((t, i) => {
+                t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
+            });
+        }
+
+        async function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const res = await fetch('/Auth/Login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (data.success) window.location.href = '/Notes/NotesApp';
+            else {
+                const err = document.getElementById('loginError');
+                err.textContent = data.message;
+                err.style.display = 'block';
+            }
+        }
+
+        async function register() {
+            const displayName = document.getElementById('regDisplayName').value;
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const res = await fetch('/Auth/Register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password, displayName })
+            });
+            const data = await res.json();
+            if (data.success) window.location.href = '/Notes/NotesApp';
+            else {
+                const err = document.getElementById('registerError');
+                err.textContent = data.message;
+                err.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
