@@ -24,7 +24,9 @@ A personal sticky notes app with a cutesy pastel design. I built as a learning p
 6. Filtered notes per user for privacy
 
 
-##Screenshots
+## screenshots
+
+- I included 3 screenshots of my app as a showcase
 
 ![App screenshot](screenshots/login-screen.png)
 
