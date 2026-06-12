@@ -8,6 +8,7 @@ A personal sticky notes app with a cutesy pastel design. I built as a learning p
 - Private accounts! Every user only sees their own notes
 - A login & register screen with a frosted glass overlay screen
 - Notes are saved to a real database
+- I hosted it locally on my pc using ngrok
 
 ## tech stack
 - **Frontend:** React (Vite), plain CSS
